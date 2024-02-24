@@ -1,1 +1,1 @@
-Compilation of GUI programs using turtle and tkinter module in python.
+## Compilation of GUI programs written in python.
