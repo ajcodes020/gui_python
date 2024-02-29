@@ -22,7 +22,7 @@ def generate_password():
 
 
 def save_all():
-    site_data = website_input.get()
+    site_data = website_input.get().title()
     eu_data = email_username_input.get()
     pass_data = password_input.get()
     new_data = {
@@ -56,20 +56,19 @@ def save_all():
 
 
 def find_password():
-    site_data = website_input.get()
+    site_data = website_input.get().title()
     try:
         with open("data.json") as file:
             data = json.load(file)
             file_data = data[site_data]
     except FileNotFoundError:
         messagebox.showinfo(title="Error", message="No Data File Found")
+    except KeyError:
+        messagebox.showinfo(title=site_data, message=f"No details for the {site_data} exists")
     else:
-        if site_data in data:
-            eu_data = file_data['email']
-            pass_data = file_data['pass']
-            messagebox.showinfo(title=site_data, message=f"Email: {eu_data}\nPassword: {pass_data}")
-        else:
-            messagebox.showinfo(title="Error", message=f"No details for the {site_data} exists")
+        eu_data = file_data['email']
+        pass_data = file_data['pass']
+        messagebox.showinfo(title=site_data, message=f"Email: {eu_data}\nPassword: {pass_data}")
 
 
 window = tk.Tk()
