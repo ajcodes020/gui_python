@@ -33,26 +33,23 @@ def save_all():
     }
 
     if site_data.strip() == "" or eu_data.strip() == "" or pass_data.strip() == "":
-        messagebox.showinfo(title="Empty Field/s", message="Don't leave empty field/s")
+        messagebox.showinfo(title="Empty Field", message="Don't leave empty field/s")
     else:
-        if site_data.strip() == "" or eu_data.strip() == "" or pass_data.strip() == "":
-            messagebox.showinfo(title="Empty Field/s", message="Don't leave empty field/s")
-        else:
-            is_ok = messagebox.askokcancel(title="Press OK to save", message=f"Verify to continue:\nWebsite: {site_data}\nEmail: {eu_data}\nPassword: {pass_data}")
-            if is_ok:
-                try:
-                    with open("data.json", "r") as file:
-                        data = json.load(file)
-                except FileNotFoundError:
-                    with open("data.json", "w") as file:
-                        json.dump(new_data, file, indent=4)
-                else:
-                    data.update(new_data)
-                    with open("data.json", "w") as file:
-                        json.dump(data, file, indent=4)
-                finally:
-                    website_input.delete(0, tk.END)
-                    password_input.delete(0, tk.END)
+        is_ok = messagebox.askokcancel(title="Press OK to save", message=f"Verify to continue:\nWebsite: {site_data}\nEmail: {eu_data}\nPassword: {pass_data}")
+        if is_ok:
+            try:
+                with open("data.json", "r") as file:
+                    data = json.load(file)
+            except FileNotFoundError:
+                with open("data.json", "w") as file:
+                    json.dump(new_data, file, indent=4)
+            else:
+                data.update(new_data)
+                with open("data.json", "w") as file:
+                    json.dump(data, file, indent=4)
+            finally:
+                website_input.delete(0, tk.END)
+                password_input.delete(0, tk.END)
 
 
 def find_password():
